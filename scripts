@@ -1,0 +1,18 @@
+Representive Strains:
+https://bv-brc.org/view/VariantLineage/#view_tab=overview
+codes from polymorphicHERV: 
+$ perl labels.pl [o]total_withlabel_50.fa [i]kmer50perstrain/ 
+$ perl unique.pl [i]total_withlabel_50.fa [o]unique.50.fa 
+$ perl uniquewithrc.pl [i]unique.50.fa [o]unique.withrc.50.fa 
+
+Dataset:
+$ module load sra-toolkit
+$ module load samtools
+$ sam-dump ERR4495556 | samtools view -bS - > ERR4495556.sam
+$ samtools view -b -L spike.bed ERR4495556.bam > ERR4495556.spike.bam
+// spike.bed is as follows:.
+MN908947.3      21563   25384   3821
+$ samtools bam2fq ERR4495556.spike.bam | seqtk seq -A > ERR4495556.fa
+// bam to fasta file. Install seqtk. GitHub - lh3/seqtk: Toolkit for processing sequences in FASTA/Q formats
+then, k-merize
+
